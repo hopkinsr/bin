@@ -1,0 +1,24 @@
+#! /bin/sh
+# search [OPTIONS] PATTERN
+# eg. find my_foo in any allowed files
+#	search my_foo
+# eg. find my_foo in any .cc files
+#	search --include="*.cc" my_foo
+#
+# A grep wrapper which uses the following options
+# -> ignore binary files
+# -> color matches
+# -> show line number of the match
+# -> exclude version control directories
+# -> exclude common build artifact directories
+# -> exclude common paths using globs from .cvsignore
+# -> recursive
+# -> based from the current working directory
+grep --binary-files=without-match --color --line-number --recursive \
+     --exclude-dir=Attic \
+     --exclude-dir=CVS --exclude-dir=.git --exclude-dir=.hg \
+     --exclude-dir=_MTN --exclude-dir=.svn \
+     --exclude-dir=.build --exclude-dir=.bootstrap --exclude-dir=.installation \
+     --exclude-from=$HOME/.cvsignore \
+     $* .
+

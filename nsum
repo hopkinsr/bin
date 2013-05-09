@@ -1,0 +1,14 @@
+#! /usr/bin/env racket
+#lang racket/base
+; nsum
+; Sums all of the numbers from standard input with 1 number per line.
+; Named nsum to not clash with sum.
+
+(require math/base)
+
+(define (in-numbers)
+  (for/list ([l (in-lines)])
+    (string->number l)))
+
+(sum (in-numbers))
+
